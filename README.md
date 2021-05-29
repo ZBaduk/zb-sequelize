@@ -1,8 +1,6 @@
 # ZB-Sequelize
 
-## Quick Start
-
-Simplify the management of sequelize transactions.
+Simplify the management of sequelize transactions using decorators.
 
 Example:
 
@@ -13,28 +11,39 @@ Example:
       // no need to create, commit or rollback a transaction.
     }
 
-:point_right:	You only need to:
+## What you need to do ?
+
+Install the package:
+
+    npm install zb-sequelize
+
+:point_right: Add this to your code:
 
   - add `@Transactional` above the function.
   - if there is a transaction parameter, add a `@Tx` to it.
 
-:bomb: You can remove::boom: 	
+:bomb: You can also remove some code. ::boom: 	
 
  - the initialization of the transaction.
  - the commit of the transaction.
  - the rollback of the transaction.
 
-:rocket: Finally, you need to add this to the start of your application.
+:rocket: Finally, typically, you have a sequelize instance somewhere when you application launches. 
+You need to share that sequelize instance as follows.
 
     initSequelizeResolver((args) => sequelize);
 
-## Why ?
+## Which problem does this solve ?
 
-It's a matter of transaction management. Where and when should transactions be created and committed. Of course the function that creates the transaction should also commit it. **However, does the caller create the transaction, or should the function create the transaction?** 
+Transaction management isn't easy, especially when transactions are carried around from one function to another. 
+Code usually has multiple access points, and quickly things get complicated.
+
+It makes sense that the class or function which creates the transaction should also commit it.
+But where should the transaction be created ?
 
  - :point_left:	Sometimes you need the caller to create the transaction. This is the case when multiple operations need to be executed using the same transaction in order to support a transactional rollback.
  - :point_right: Sometimes you just want the function to create it. That is true, when it's always executed as a single operation.
- - :middle_finger: Sometimes you want to support both. You could split it up in 2 functions, or you could add a lot of boilerplate code to your function to support both.
+ - Sometimes you want to support both. You could split it up in 2 functions, or you could add a lot of boilerplate code to your function to support both.
 
 It does not have to be so complex actually. Decorators can actually do all this work for you. You keep the `transaction` property and pass it around as you always would. It will be instantiated automatically when necessary. You don't have to check for `if (transaction == null)`, you can assume that it will always be created for you.
 

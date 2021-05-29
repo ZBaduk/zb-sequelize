@@ -1,12 +1,16 @@
 {
   "name": "zb-sequelize",
   "description": "sequelize extensions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ZBaduk/zb-sequelize.git"
+  },
   "private": false,
   "scripts": {
     "build": "tsc"
