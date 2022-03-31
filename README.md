@@ -7,7 +7,7 @@ Example:
     import { Transactional, Tx } from 'zb-sequelize';
 
     @Transactional
-    function(@Tx transaction) {
+    function demo(@Tx transaction) {
       // no need to create, commit or rollback a transaction.
     }
 
