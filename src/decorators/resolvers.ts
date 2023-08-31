@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize/types';
+import { Sequelize } from 'sequelize';
 
 export const DEFAULT_RESOLVER = (functionName: string, args: any[]): Sequelize => {
   const sequelize = args.find((a) => a instanceof Sequelize);
